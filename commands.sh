@@ -30,11 +30,11 @@ fg_command_not_found() {
     fg_script_help
 }
 
-fg_change_to_powerline_style()
+fg_change_to_default_style()
 {
     local current_dir
     current_dir=$(pwd)
-    cd ~/.fancy-git/ && git checkout powerline-style
+    cd ~/.fancy-git/ && git checkout master
     . ~/.bashrc
     cd "$current_dir" || return
     echo ""
@@ -42,10 +42,15 @@ fg_change_to_powerline_style()
     echo ""
 }
 
+fg_fancygit_reload() {
+    . ~/.bashrc
+}
+
 case $1 in
     "-h"|"--help") fg_script_help;;
     "-v"|"--version") fg_show_version;;
     "self-update") fg_self_update;;
-    "wow") fg_change_to_powerline_style;;
+    "default") fg_change_to_default_style;;
+    "reload") fg_fancygit_reload;;
     *) fg_command_not_found "$1";;
 esac
