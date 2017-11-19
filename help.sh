@@ -1,15 +1,19 @@
+#!/bin/bash
 
- ╔═╗┌─┐┌┐┌┌─┐┬ ┬  ╔═╗┬┌┬┐  ╦ ╦┌─┐┬  ┌─┐
- ╠╣ ├─┤││││  └┬┘  ║ ╦│ │   ╠═╣├┤ │  ├─┘
- ╚  ┴ ┴┘└┘└─┘ ┴   ╚═╝┴ ┴   ╩ ╩└─┘┴─┘┴
- Author: Diogo Alexsander Cavilha <diogocavilha@gmail.com>
- Date: 02.28.2016
+. ~/.fancy-git/version.sh
+
+fg_current_year=$(date +%Y)
+
+echo " Fancy Git v$FANCYGIT_VERSION (c) $fg_current_year by Diogo Alexsander Cavilha <diogocavilha@gmail.com>.
+ Prompt changer to show a few cool git informations about your repository on terminal.
+
+ COMMANDS
 
  fancygit -h, --help        Show this help.
  fancygit -v, --version     Show the fancygit version.
- fancygit self-update       Update fancygit code with the last release from github.
- fancygit default           Change to colored style.
- fancygit reload            Reload the prompt.
+ fancygit update            Update fancygit code with the last release from github.
+ fancygit simple            Change prompt to simple mode.
+ fancygit default           Change prompt to default (colored) mode.
 
  ALIASES
 
@@ -18,7 +22,7 @@
  gaa                        Add all files in order to commit.
  gd                         Clear screen and git diff.
  gcm                        Start committing.
- gcmm "message"             Start committing with a message.
+ gcmm \"message\"             Start committing with a message.
  gpl                        Git pull.
  gps                        Git push.
  gplo <branch-name>         Git pull from <branch-name> to current local branch.
@@ -42,4 +46,9 @@
 
  FILTERING COMMITS
 
- glp ["filter 1" "filter 2"... "filter 5"] It allows you to do nested filters.
+ glp [\"filter 1\" \"filter 2\"... \"filter 5\"] It allows you to do nested filters.
+
+ By: Diogo Alexsander Cavilha <diogocavilha@gmail.com>
+ Date: 02.28.2016
+ Source code available at: <https://github.com/diogocavilha/fancy-git>
+"

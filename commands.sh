@@ -1,27 +1,24 @@
 #!/bin/bash
 
-fg_version="3.1"
+. ~/.fancy-git/version.sh
 
 fg_script_help() {
-    cat ~/.fancy-git/help
+    sh ~/.fancy-git/help.sh | less
 }
 
 fg_show_version() {
-    echo "Fancy Git $fg_version"
-    echo "Copyleft (ɔ) 2016 by Diogo Alexsander Cavilha. <diogocavilha@gmail.com>"
+    local current_year
+    current_year=$(date +%Y)
+    echo " Fancy Git v$FANCYGIT_VERSION (c) $current_year by Diogo Alexsander Cavilha <diogocavilha@gmail.com>."
     echo ""
 }
 
-fg_self_update() {
+fg_update() {
     local current_dir
     current_dir=$(pwd)
     cd ~/.fancy-git/ && git pull
-    . ~/.bashrc
     cd "$current_dir" || return
-    echo ""
-    echo " Fancy git is up-to-date."
-    echo " Version: $fg_version"
-    echo ""
+    cat ~/.fancy-git/CHANGELOG.md
 }
 
 fg_command_not_found() {
@@ -30,12 +27,11 @@ fg_command_not_found() {
     fg_script_help
 }
 
-fg_change_to_default_style()
+fg_change_mode()
 {
     local current_dir
     current_dir=$(pwd)
-    cd ~/.fancy-git/ && git checkout master
-    . ~/.bashrc
+    cd ~/.fancy-git/ && git checkout "$1"
     cd "$current_dir" || return
     echo ""
     echo " If you cannot see any changes yet, please restart the terminal."
@@ -49,8 +45,8 @@ fg_fancygit_reload() {
 case $1 in
     "-h"|"--help") fg_script_help;;
     "-v"|"--version") fg_show_version;;
-    "self-update") fg_self_update;;
-    "default") fg_change_to_default_style;;
-    "reload") fg_fancygit_reload;;
+    "update") fg_update;;
+    "default") fg_change_mode "master";;
+    "simple") fg_change_mode "simple";;
     *) fg_command_not_found "$1";;
 esac
